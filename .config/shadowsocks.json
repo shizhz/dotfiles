@@ -1,0 +1,8 @@
+{
+    "server": "209.141.46.46",
+    "server_port": 8766,
+    "local_port": 4322,
+    "password": "asdf_jkl",
+    "timeout": "600",
+    "method": "AES-256-CFB"
+}
