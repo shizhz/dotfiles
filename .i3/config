@@ -10,7 +10,8 @@
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
 set $win Mod4
-set $mod Mod1
+# set $mod Mod1
+set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -48,10 +49,10 @@ bindsym $mod+l focus up
 bindsym $mod+semicolon focus right
 
 # alternatively, you can use the cursor keys:
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
+# bindsym $mod+Left focus left
+# bindsym $mod+Down focus down
+# bindsym $mod+Up focus up
+# bindsym $mod+Right focus right
 
 # move focused window
 bindsym $mod+Shift+j move left
@@ -155,6 +156,6 @@ bar {
 }
 
 bindsym $mod+Tab exec i3-quickswitch
-bindsym $win+x layout toggle all
-bindsym $win+l exec i3lock
-bindsym $win+e exec thunar
+bindsym $mod+x layout toggle all
+bindsym $mod+l exec i3lock
+bindsym $mod+e exec thunar
