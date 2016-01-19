@@ -44,7 +44,7 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages then consider to create a layer, you can also put the
    ;; configuration in `dotspacemacs/config'.
-   dotspacemacs-additional-packages '(fancy-narrow)
+   dotspacemacs-additional-packages '(fancy-narrow restclient)
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
@@ -210,6 +210,7 @@ layers configuration. You are free to put any user code."
     "nf" 'fancy-narrow-to-defun
     "np" 'fancy-narrow-to-page
     "nw" 'fancy-widen)
+  (add-to-list 'auto-mode-alist '("\\.rest\\'" . restclient-mode))
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
