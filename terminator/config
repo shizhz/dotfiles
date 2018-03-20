@@ -1,0 +1,38 @@
+[global_config]
+  enabled_plugins = TerminatorThemes, LaunchpadCodeURLHandler, APTURLHandler, LaunchpadBugURLHandler
+  extra_styling = False
+  scroll_tabbar = True
+  title_hide_sizetext = True
+[keybindings]
+[layouts]
+  [[default]]
+    [[[child1]]]
+      parent = window0
+      profile = default
+      type = Terminal
+    [[[window0]]]
+      parent = ""
+      type = Window
+[plugins]
+[profiles]
+  [[default]]
+    background_color = "#242424"
+    background_darkness = 0.46
+    background_type = transparent
+    copy_on_selection = True
+    cursor_color = "#97979b"
+    font = Monospace 10
+    foreground_color = "#eff0eb"
+    palette = "#282a36:#ff5c57:#5af78e:#f3f99d:#57c7ff:#ff6ac1:#9aedfe:#f1f1f0:#686868:#ff5c57:#5af78e:#f3f99d:#57c7ff:#ff6ac1:#9aedfe:#eff0eb"
+  [[Snazzy]]
+    background_color = "#242424"
+    cursor_color = "#97979b"
+    foreground_color = "#eff0eb"
+    palette = "#282a36:#ff5c57:#5af78e:#f3f99d:#57c7ff:#ff6ac1:#9aedfe:#f1f1f0:#686868:#ff5c57:#5af78e:#f3f99d:#57c7ff:#ff6ac1:#9aedfe:#eff0eb"
+  [[original]]
+    background_color = "#002b36"
+    background_darkness = 0.46
+    background_type = transparent
+    cursor_color = "#aaaaaa"
+    font = Monospace 10
+    foreground_color = "#839496"
