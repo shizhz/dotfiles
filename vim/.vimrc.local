@@ -1,0 +1,17 @@
+set relativenumber
+nmap ; :
+imap <C-a> <ESC>^i
+imap <C-e> <ESC>$a
+autocmd FileType c nmap <leader>ba :CtrlPTag<CR>
+autocmd FileType c nmap <leader>bb :CtrlPBufTag<CR>
+autocmd FileType go set nolist
+autocmd FileType go nmap <leader>go :GoDecls<CR>
+autocmd FileType go nmap <leader>gO :GoDeclsDir<CR>
+autocmd FileType go nmap <leader>tc :GoCoverage<CR>
+autocmd FileType go nmap <leader>tC :GoCoverageClear<CR>
+let g:ycm_log_level="debug"
+let g:snips_author = 'Shizhz <messi.shizz@gmail.com>'
+set guioptions-=m  "remove menu bar
+set guioptions-=T  "remove toolbar
+set guioptions-=r  "remove right-hand scroll bar
+set guioptions-=L  "remove left-hand scroll bar
