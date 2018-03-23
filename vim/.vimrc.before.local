@@ -10,3 +10,4 @@ let g:indentLine_color_tty_light = 7 " (default: 4)
 let g:indentLine_color_dark = 1 " (default: 2)
 let g:indentLine_char = '┆'
 let g:spf13_noninvasive_completion = 1
+let g:ycm_server_python_interpreter = '/usr/bin/python'
