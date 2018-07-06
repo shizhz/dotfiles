@@ -17,8 +17,8 @@
 [plugins]
 [profiles]
   [[default]]
-    background_color = "#242424"
-    background_darkness = 0.46
+    background_color = "#34495e"
+    background_darkness = 0.7
     background_type = transparent
     copy_on_selection = True
     cursor_color = "#97979b"
@@ -28,6 +28,11 @@
     palette = "#282a36:#ff5c57:#5af78e:#f3f99d:#57c7ff:#ff6ac1:#9aedfe:#f1f1f0:#686868:#ff5c57:#5af78e:#f3f99d:#57c7ff:#ff6ac1:#9aedfe:#eff0eb"
     scrollbar_position = hidden
     show_titlebar = False
+  [[Atom]]
+    background_color = "#161719"
+    cursor_color = "#d0d0d0"
+    foreground_color = "#c5c8c6"
+    palette = "#000000:#fd5ff1:#87c38a:#ffd7b1:#85befd:#b9b6fc:#85befd:#e0e0e0:#000000:#fd5ff1:#94fa36:#f5ffa8:#96cbfe:#b9b6fc:#85befd:#e0e0e0"
   [[Snazzy]]
     background_color = "#242424"
     cursor_color = "#97979b"

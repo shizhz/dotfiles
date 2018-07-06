@@ -1,2 +1,3 @@
 Bundle 'Yggdroot/indentLine'
 Bundle 'tomasiser/vim-code-dark'
+Bundle 'posva/vim-vue'
