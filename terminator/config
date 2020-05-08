@@ -22,10 +22,11 @@
     background_type = transparent
     copy_on_selection = True
     cursor_color = "#97979b"
-    font = Monospace 10
+    font = DejaVu Sans Bold Semi-Condensed 8
     foreground_color = "#eff0eb"
     icon_bell = False
     palette = "#282a36:#ff5c57:#5af78e:#f3f99d:#57c7ff:#ff6ac1:#9aedfe:#f1f1f0:#686868:#ff5c57:#5af78e:#f3f99d:#57c7ff:#ff6ac1:#9aedfe:#eff0eb"
+    scrollback_lines = 5000
     scrollbar_position = hidden
     show_titlebar = False
   [[Atom]]

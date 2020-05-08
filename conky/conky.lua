@@ -61,15 +61,6 @@ conky.text = [[
 
 # JSON for i3bar
 [
-${if_empty ${exec cat /sys/class/power_supply/BAT0/status | grep 'Charging'}}
-    ${if_match ${battery_percent BAT0} <= 10 }
-{
-    "full_text": "Plug In Charger!!!",
-    "urgent": true,
-    "color": "\#FF0000"
-},
-    ${endif}
-${endif}
 ${if_match "${exec xset q | grep 'Caps Lock' | sed 's/.*Caps Lock:[ ]*\([^ ]*\).*/\1/'}"=="on"}
 {
     "full_text": "CapsLock",
@@ -77,7 +68,7 @@ ${if_match "${exec xset q | grep 'Caps Lock' | sed 's/.*Caps Lock:[ ]*\([^ ]*\).
 },
 ${endif}
 {
-    "full_text": " : ${downspeed wlp2s0}/s : ${upspeed wlp2s0}/s T: ${totaldown wlp2s0}",
+    "full_text": ": ${downspeed eno1}/s : ${upspeed eno1}/s T: ${totaldown eno1}",
     "border": "\#cccccc",
     ${template0},
     "separator": false,
@@ -111,9 +102,9 @@ ${if_up eth0}
     "separator_block_width": 3
 },
 ${endif}
-${if_up wlp2s0}
+${if_up eno1}
 {
-    "full_text": "  ${addr wlp2s0} ",
+    "full_text": "${addr eno1} ",
     "border": "\#cccccc",
     ${template0},
     "separator": false,
@@ -125,7 +116,7 @@ ${endif}
 #     "color": ${if_match ${cpu cpu0}>90}"\#FF0000"${else}${if_match ${cpu cpu0}<10}"\#00CC00"${else}"\#ffffff"${endif}${endif}
 # },
 {
-    "full_text": "  / ${fs_free} (${fs_free_perc /}%) ",
+    "full_text": "/ ${fs_free} (${fs_free_perc /}%) ",
     "separator": false,
     "separator_block_width": 3,
     ${template0},
@@ -148,7 +139,7 @@ ${endif}
     ${endif}
 },
 {
-    "full_text": "   ${memperc}% ",
+    "full_text": "${memperc}% ",
     "separator": false,
     "separator_block_width": 3,
     ${template0},
@@ -175,14 +166,14 @@ ${if_match ${memperc}<60}
 ${endif}
 },
 {
-    "full_text": "  ${exec sensors acpitz-virtual-0 | grep 'temp2' | awk '{print $2}'}, ${cpu cpu0}% ",
+    "full_text": "${exec sensors acpitz-virtual-0 | grep 'temp2' | awk '{print $2}'}, ${cpu cpu0}% ",
     "border": "\#cccccc",
     ${template0},
     "separator": false,
     "separator_block_width": 3
 },
 {
-    "full_text": "  ${uptime_short} ",
+    "full_text": "${uptime_short} ",
     "min_width": "59m59s",
     "border": "\#cccccc",
     ${template0},
@@ -190,25 +181,7 @@ ${endif}
     "separator_block_width": 3
 },
 {
-    ${if_match "${exec pamixer --get-mute}"=="true"}
-    "full_text": "  Muted ",
-    "color": "\#b70909",
-    ${else}
-        ${if_match ${exec pamixer --get-volume }>=50}
-    "full_text": "  ${exec pamixer --get-volume}% ",
-    "color": "\#cccccc",
-        ${else}
-    "full_text": "  ${exec pamixer --get-volume}% ",
-    "color": "\#cccccc",
-        ${endif}
-    ${endif}
-    "border": "\#cccccc",
-    ${template0},
-    "separator": false,
-    "separator_block_width": 3
-},
-{
-    "full_text": " ${time %a %d/%m/%y} - ${time %H:%M}"
+    "full_text": "${time %a %d/%m/%y} - ${time %H:%M}"
 }
 ],
 

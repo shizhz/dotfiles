@@ -1,7 +1,8 @@
-let g:spf13_bundle_groups = ['general', 'writing', 'programming', 'python', 'go', 'javascript', 'html', 'misc', 'youcompleteme']
+"let g:spf13_bundle_groups = ['general', 'writing', 'programming', 'python', 'go', 'javascript', 'html', 'misc', 'youcompleteme']
+let g:spf13_bundle_groups = ['general', 'writing', 'programming', 'go']
 "let g:spf13_bundle_groups = ['general', 'writing', 'programming', 'python', 'go', 'javascript', 'html', 'misc', 'neocomplete']
-let g:neocomplete#sources#omni#functions = {'go': 'go#complete#Complete'}
-let g:neocomplete#sources#omni#input_patterns = {'go': '[^.[:digit:] *\t]\.\w*'}
+"let g:neocomplete#sources#omni#functions = {'go': 'go#complete#Complete'}
+"let g:neocomplete#sources#omni#input_patterns = {'go': '[^.[:digit:] *\t]\.\w*'}
 let g:loaded_indent_guides = 0 " Disable nathanaelkane/vim-indent-guides
 
 " IndentLine Configuration

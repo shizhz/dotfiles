@@ -1,3 +1,4 @@
 rofi.theme:/home/shizhz/.config/rofi/themes/arc-red-dark.rasi
 rofi.ssh-client:ssh
 rofi.ssh-command:{terminal} -e "{ssh-client} {host}"
+rofi.terminal:terminator

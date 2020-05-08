@@ -1,21 +1,146 @@
 set relativenumber
 set nospell
+set encoding=utf-8
 colorscheme codedark
 let g:airline_theme = 'codedark'
 nmap ; :
 imap <C-a> <ESC>^i
 imap <C-e> <ESC>$a
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
+let g:go_snippet_engine = "neosnippet"
+let g:go_def_mapping_enabled = 0
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_types = 1
+let g:go_auto_sameids = 0
+"let g:go_debug=['lsp']
+
 autocmd FileType c nmap <leader>ba :CtrlPTag<CR>
 autocmd FileType c nmap <leader>bb :CtrlPBufTag<CR>
 autocmd FileType go set nolist
+autocmd FileType go nmap <leader>gB :GoBuild<CR>
+autocmd FileType go nmap <leader>gI :GoImplements<CR>
 autocmd FileType go nmap <leader>go :GoDecls<CR>
 autocmd FileType go nmap <leader>gO :GoDeclsDir<CR>
 autocmd FileType go nmap <leader>tc :GoCoverage<CR>
+autocmd FileType go nmap <leader>tf :GoTestFunc<CR>
+autocmd FileType go nmap <F10> :GoTest -short<cr>
 autocmd FileType go nmap <leader>tC :GoCoverageClear<CR>
-let g:ycm_log_level="debug"
+autocmd FileType go nmap <M-C-T> :GoAlternate<CR>
+autocmd Filetype go nmap <leader>gah <Plug>(go-alternate-split)
+autocmd Filetype go nmap <leader>gav <Plug>(go-alternate-vertical)
+autocmd FileType go nmap <leader>d :GoDoc<CR>
+autocmd FileType go nmap <leader>D :GoDocBrowser<CR>
+
+" ----------------- coc config --------------------------
+set nobackup
+set nowritebackup
+
+" if hidden is not set, TextEdit might fail.
+set hidden
+" Better display for messages
+set cmdheight=2
+" Smaller updatetime for CursorHold & CursorHoldI
+set updatetime=300
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
+" always show signcolumns
+set signcolumn=yes
+
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Use `[c` and `]c` to navigate diagnostics
+nmap <silent> [c <Plug>(coc-diagnostic-prev)
+nmap <silent> ]c <Plug>(coc-diagnostic-next)
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+"nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gi <Plug>(coc-definition)
+nmap <silent> gr <Plug>(coc-references)
+"nmap <silent> gr <Plug>(coc-refactor)
+
+" Use U to show documentation in preview window
+nnoremap <silent> U :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Remap for rename current word
+nmap <leader>rn <Plug>(coc-rename)
+
+" Remap for format selected region
+vmap <leader>ff  <Plug>(coc-format-selected)
+nmap <leader>ff  <Plug>(coc-format-selected)
+" Show all diagnostics
+nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+" Manage extensions
+nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+" Show commands
+nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+" Find symbol of current document
+nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols
+nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list
+nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
+
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Use <C-j> for both expand and jump (make expand higher priority.)
+imap <C-j> <Plug>(coc-snippets-expand-jump)
+
+
+"autocmd FileType go autocmd BufWritePre <buffer> :GoInstall<CR>
+"let g:ycm_log_level="debug"
 let g:snips_author = 'Shizhz <messi.shizz@gmail.com>'
 set guioptions-=m  "remove menu bar
 set guioptions-=T  "remove toolbar
 set guioptions-=r  "remove right-hand scroll bar
 set guioptions-=L  "remove left-hand scroll bar
 
+" Override the config at .vimrc line 309: do not max the current selected
+" window
+map <C-J> <C-W>j
+map <C-K> <C-W>k
+map <C-L> <C-W>l
+map <C-H> <C-W>h
+
+" Tagbar
+"let g:tagbar_vertical = 30
+nnoremap <silent> <F9> :TagbarToggle<CR>
