@@ -334,7 +334,7 @@ bar {
 
 # exec --no-startup-id feh --bg-scale /usr/share/pixmaps/background-img-face.jpg
 exec --no-startup-id google-chrome-stable
-exec --no-startup-id terminator
+# exec --no-startup-id terminator
 exec --no-startup-id fcitx
 exec --no-startup-id electronic-wechat
 exec --no-startup-id dingtalk
@@ -344,7 +344,6 @@ exec --no-startup-id dingtalk
 exec --no-startup-id $HOME/bin/start-proxies; resize set 1200 1200; sticky enable; move position 500 300 # start shadowsocks and cow with window title "proxies"
 exec --no-startup-id setup_display # setup dual monitor display. lighdm does not work correctly with option setup-display-script
 exec --no-startup-id emacs --daemon
-exec --no-startup-id xmodmap .xmodmaprc
 
 for_window [title=Gitter] move window to workspace 2R:Chat
 for_window [title=Gitter] focus
