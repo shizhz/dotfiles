@@ -51,9 +51,32 @@
 ;;
 ;; You can also try 'gd' (or 'C-c g d') to jump to their definition and see how
 ;; they are implemented.
+
+;; (setq which-key-idle-delay 0.5)
+;; (setq which-key-idle-secondary-delay 0)
+(setq frame-title-format '(buffer-file-name "%f" (dired-directory dired-directory "%b")))
+(setq url-proxy-services
+   '(("no_proxy" . "^\\(localhost\\|10\\..*\\|192\\.168\\..*\\)")
+     ("http" . "localhost:7890")
+     ("https" . "localhost:7890")))
+
+;; (setq lsp-log-io 1)
+;; (setq lsp-print-performance 1)
 (setq doom-themes-treemacs-theme "doom-colors")
-;; (add-hook 'go-mode-hook (lambda ()
-;;                           (go-eldoc-setup)
-;;                           (add-hook 'before-save-hook 'gofmt-before-save)))
-(add-hook 'before-save-hook #'lsp-organize-imports)
-(add-hook 'before-save-hook #'lsp-format-buffer)
+
+(global-undo-tree-mode)
+
+;; evil-snipe config
+(evil-snipe-mode +1)
+(evil-snipe-override-mode +1)
+(push 'wdired-mode evil-snipe-disabled-modes)
+(push 'magit-mode evil-snipe-disabled-modes)
+(push '(?\[ "[[({]") evil-snipe-aliases)
+(setq evil-snipe-scope 'buffer)
+
+(add-hook! 'before-save-hook
+           #'lsp-format-buffer
+           #'lsp-organize-imports)
+
+(map! "C-s" #'counsel-grep-or-swiper)
+(map! :leader "SPC" #'counsel-M-x)
