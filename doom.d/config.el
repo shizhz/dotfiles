@@ -83,6 +83,7 @@
 
 (map! "C-s" #'counsel-grep-or-swiper)
 (map! :leader "SPC" #'counsel-M-x)
+(map! "<print>" #'+treemacs/toggle)
 
 (setq lsp-ui-sideline-show-hover nil)
 
