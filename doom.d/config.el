@@ -60,6 +60,9 @@
      ("http" . "localhost:7890")
      ("https" . "localhost:7890")))
 
+;; (setq which-key-idle-delay 0)
+;; (setq which-key-idle-secondary-delay 0)
+
 ;; (setq lsp-log-io 1)
 ;; (setq lsp-print-performance 1)
 (setq doom-themes-treemacs-theme "doom-colors")
@@ -80,3 +83,7 @@
 
 (map! "C-s" #'counsel-grep-or-swiper)
 (map! :leader "SPC" #'counsel-M-x)
+
+(setq lsp-ui-sideline-show-hover nil)
+
+(undo-tree-mode)
