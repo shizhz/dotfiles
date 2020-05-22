@@ -87,4 +87,4 @@
 
 (setq lsp-ui-sideline-show-hover nil)
 
-(undo-tree-mode)
+(global-undo-tree-mode)

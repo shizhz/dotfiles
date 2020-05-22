@@ -1,34 +1,25 @@
 [global_config]
   borderless = True
-  enabled_plugins = TerminatorThemes, LaunchpadCodeURLHandler, APTURLHandler, LaunchpadBugURLHandler
   extra_styling = False
   scroll_tabbar = True
   title_hide_sizetext = True
+  enabled_plugins = TerminatorThemes, LaunchpadCodeURLHandler, APTURLHandler, LaunchpadBugURLHandler
 [keybindings]
-[layouts]
-  [[default]]
-    [[[child1]]]
-      parent = window0
-      profile = default
-      type = Terminal
-    [[[window0]]]
-      parent = ""
-      type = Window
-[plugins]
+  edit_tab_title = <Primary><Shift><Alt>a
 [profiles]
   [[default]]
+    icon_bell = False
     background_color = "#34495e"
     background_darkness = 0.7
     background_type = transparent
-    copy_on_selection = True
     cursor_color = "#97979b"
     font = DejaVu Sans Bold Semi-Condensed 8
     foreground_color = "#eff0eb"
-    icon_bell = False
-    palette = "#282a36:#ff5c57:#5af78e:#f3f99d:#57c7ff:#ff6ac1:#9aedfe:#f1f1f0:#686868:#ff5c57:#5af78e:#f3f99d:#57c7ff:#ff6ac1:#9aedfe:#eff0eb"
-    scrollback_lines = 5000
-    scrollbar_position = hidden
     show_titlebar = False
+    scrollbar_position = hidden
+    scrollback_lines = 5000
+    palette = "#282a36:#ff5c57:#5af78e:#f3f99d:#57c7ff:#ff6ac1:#9aedfe:#f1f1f0:#686868:#ff5c57:#5af78e:#f3f99d:#57c7ff:#ff6ac1:#9aedfe:#eff0eb"
+    copy_on_selection = True
   [[Atom]]
     background_color = "#161719"
     cursor_color = "#d0d0d0"
@@ -46,3 +37,13 @@
     cursor_color = "#aaaaaa"
     font = Monospace 10
     foreground_color = "#839496"
+[layouts]
+  [[default]]
+    [[[child1]]]
+      parent = window0
+      profile = default
+      type = Terminal
+    [[[window0]]]
+      parent = ""
+      type = Window
+[plugins]
