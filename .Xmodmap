@@ -15,6 +15,6 @@ remove Mod4 = Super_R
 remove Control = Control_R
 keysym semicolon = Control_R
 keysym Control_R = Super_R
-keysym Super_R = semicolon
+keysym Super_R = semicolon colon
 add Mod4 = Super_R 
 add Control = Control_R
