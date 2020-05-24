@@ -67,12 +67,11 @@
 ;; (setq lsp-print-performance 1)
 (setq doom-themes-treemacs-theme "doom-colors")
 
-(global-undo-tree-mode)
-
-;; evil-snipe config
+; evil-snipe config
 (evil-snipe-mode +1)
 (evil-snipe-override-mode +1)
 (push 'wdired-mode evil-snipe-disabled-modes)
+(push 'dired-mode evil-snipe-disabled-modes)
 (push 'magit-mode evil-snipe-disabled-modes)
 (push '(?\[ "[[({]") evil-snipe-aliases)
 (setq evil-snipe-scope 'buffer)
@@ -86,5 +85,4 @@
 (map! "<print>" #'+treemacs/toggle)
 
 (setq lsp-ui-sideline-show-hover nil)
-
-(global-undo-tree-mode)
+(setq ivy-read-action-function #'ivy-hydra-read-action)

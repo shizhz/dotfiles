@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: rc
+# --
+$1 := make(chan $2)
+
+go func() {
+    defer close($1)
+    $0
+}()
+
+return $1

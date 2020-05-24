@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: vchan
+# --
+$1 := make(chan $2)
+$0
