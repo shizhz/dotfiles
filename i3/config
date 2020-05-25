@@ -55,10 +55,10 @@ bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
 #bindsym $mod+p exec "rofi -show-icons -show window"
-bindsym --release $mod+Shift+s exec --no-startup-id deepin-screenshot
+bindsym --release $mod+Shift+s exec --no-startup-id $HOME/bin/screenshot.sh
 bindsym $mod+d exec "rofi -show-icons -modi run,drun,ssh -show combi"
-bindsym $mod+p exec "rofi -show-icons -modi window,Google:$HOME/.config/rofi/rofi_google.sh -show window"
-bindsym $mod+g exec "rofi -show-icons -modi window,Google:$HOME/.config/rofi/rofi_google.sh -show Google"
+# bindsym $mod+p exec "rofi -show-icons -modi window,Google:$HOME/.config/rofi/rofi_google.sh -show window"
+# bindsym $mod+g exec "rofi -show-icons -modi window,Google:$HOME/.config/rofi/rofi_google.sh -show Google"
 #for_window [urgent="latest" class="Chromium"] focus
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
@@ -345,6 +345,7 @@ exec --no-startup-id $HOME/bin/start-proxies; resize set 1200 1200; sticky enabl
 exec --no-startup-id setup_display # setup dual monitor display. lighdm does not work correctly with option setup-display-script
 exec --no-startup-id emacs --daemon
 
+focus_on_window_activation focus
 for_window [title=Gitter] move window to workspace 2R:Chat
 for_window [title=Gitter] focus
 

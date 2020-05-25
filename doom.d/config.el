@@ -81,7 +81,11 @@
            #'lsp-format-buffer
            #'lsp-organize-imports)
 
-(map! "C-s" #'counsel-grep-or-swiper)
+;; key bindings
+(map! "C-s" #'counsel-grep-or-swiper
+      "C-M-[" #'+evil/previous-beginning-of-method 
+      "C-M-]" #'+evil/next-beginning-of-method 
+      )
 (map! :leader "SPC" #'counsel-M-x)
 
 (setq lsp-ui-sideline-show-hover nil)
