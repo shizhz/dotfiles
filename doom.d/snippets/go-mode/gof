@@ -1,7 +1,7 @@
 # -*- mode: snippet -*-
 # name: gof
 # --
-go func($1 $2) $3 {
+go func($1 $2) {
    $0
-}($4)
+}($3)
 
