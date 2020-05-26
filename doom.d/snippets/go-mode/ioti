@@ -1,0 +1,4 @@
+const (
+      $1    int = iota 
+      $0
+)
