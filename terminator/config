@@ -50,6 +50,7 @@
     cursor_color = "#dcdcdc"
     font = DejaVu Sans Bold Semi-Condensed 8
     foreground_color = "#dcdcdc"
+    show_titlebar = False
     scrollbar_position = hidden
     scroll_on_output = True
     palette = "#3f3f3f:#cc9393:#7f9f7f:#e3ceab:#dfaf8f:#cc9393:#8cd0d3:#dcdccc:#3f3f3f:#cc9393:#7f9f7f:#e3ceab:#dfaf8f:#cc9393:#8cd0d3:#dcdccc"

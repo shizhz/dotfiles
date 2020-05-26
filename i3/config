@@ -299,7 +299,7 @@ mode  "PTM" {
 
 bindcode 127 mode "PTM"
 
-bindsym $mod+u fullscreen disable; floating enable; resize set 2070 1340; sticky enable; move position 245 245
+# bindsym $mod+u fullscreen disable; floating enable; resize set 2070 1340; sticky enable; move position 245 245
 bindsym $mod+Shift+u floating disable;sticky disable
 bindsym $mod+z scratchpad show; move position 500px 300px
 bindsym $mod+Shift+z move scratchpad

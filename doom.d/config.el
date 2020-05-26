@@ -90,3 +90,9 @@
 
 (setq lsp-ui-sideline-show-hover nil)
 (setq ivy-read-action-function #'ivy-hydra-read-action)
+
+;; Auto-format after paste: https://discordapp.com/channels/406534637242810369/603399769015975996/714207056902619138
+(defadvice! reindent-after-paste (&rest _)
+  :after #'evil-paste-after
+  (call-interactively #'+evil/reselect-paste)
+  (call-interactively #'evil-indent))
