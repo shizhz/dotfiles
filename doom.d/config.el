@@ -85,9 +85,17 @@
       "C-M-[" #'+evil/previous-beginning-of-method 
       "C-M-]" #'+evil/next-beginning-of-method 
       )
+(define-key evil-insert-state-map (kbd "C-j") 'company-yasnippet) ;; Used to map to +default/newline
+(define-key evil-insert-state-map (kbd "C-x C-s") 'save-buffer);; Used to map to company-yasnippet
+
+
 (map! :leader "SPC" #'counsel-M-x)
 (map! "<print>" #'+treemacs/toggle)
 ;; (map! :leader "o p" #'treemacs-display-current-project-exclusively)
+(define-key company-active-map (kbd "TAB") 'company-complete-selection)
+(define-key company-active-map (kbd "<return>") 'newline-and-indent) 
+(define-key company-active-map (kbd "RET") 'newline-and-indent) 
+(define-key company-active-map (kbd "<tab>") 'company-complete-selection)
 
 (setq lsp-ui-sideline-show-hover nil)
 (setq ivy-read-action-function #'ivy-hydra-read-action)
