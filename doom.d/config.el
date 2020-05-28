@@ -87,6 +87,7 @@
       )
 (map! :leader "SPC" #'counsel-M-x)
 (map! "<print>" #'+treemacs/toggle)
+;; (map! :leader "o p" #'treemacs-display-current-project-exclusively)
 
 (setq lsp-ui-sideline-show-hover nil)
 (setq ivy-read-action-function #'ivy-hydra-read-action)
@@ -96,3 +97,7 @@
   :after #'evil-paste-after
   (call-interactively #'+evil/reselect-paste)
   (call-interactively #'evil-indent))
+
+(put 'projectile-grep 'disabled nil)
+(put 'projectile-ripgrep 'disabled nil)
+(put 'erase-buffer 'disabled nil)
