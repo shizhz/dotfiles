@@ -67,6 +67,8 @@
 ;; (setq lsp-print-performance 1)
 (setq doom-themes-treemacs-theme "doom-colors")
 
+(setq read-process-output-max (* 3 1024 1024))
+(setq gc-cons-threshold 100000000)
 ; evil-snipe config
 (evil-snipe-mode +1)
 (evil-snipe-override-mode +1)
@@ -87,16 +89,17 @@
       )
 (define-key evil-insert-state-map (kbd "C-j") 'company-yasnippet) ;; Used to map to +default/newline
 (define-key evil-insert-state-map (kbd "C-x C-s") 'save-buffer);; Used to map to company-yasnippet
-
+(define-key evil-insert-state-map (kbd "C-k") 'kill-line) ;; Used to map to evil-insert-digraph
 
 (map! :leader "SPC" #'counsel-M-x)
 (map! "<print>" #'+treemacs/toggle)
-;; (map! :leader "o p" #'treemacs-display-current-project-exclusively)
+;; (map! :leader "o p" #'tremacs-display-current-project-exclusively)
 (define-key company-active-map (kbd "TAB") 'company-complete-selection)
-(define-key company-active-map (kbd "<return>") 'newline-and-indent) 
-(define-key company-active-map (kbd "RET") 'newline-and-indent) 
 (define-key company-active-map (kbd "<tab>") 'company-complete-selection)
+;; (define-key company-active-map (kbd "<return>") 'newline-and-indent) 
+;; (define-key company-active-map (kbd "RET") 'newline-and-indent) 
 
+(setq lsp-prefer-capf t)
 (setq lsp-ui-sideline-show-hover nil)
 (setq ivy-read-action-function #'ivy-hydra-read-action)
 
@@ -106,6 +109,46 @@
   (call-interactively #'+evil/reselect-paste)
   (call-interactively #'evil-indent))
 
-(put 'projectile-grep 'disabled nil)
-(put 'projectile-ripgrep 'disabled nil)
-(put 'erase-buffer 'disabled nil)
+;; golangci-lint config, refer to https://github.com/weijiangan/flycheck-golangci-lint for more details
+(setq flycheck-golangci-lint-fast t)
+
+(defun hydra-vi/pre ()
+  (set-cursor-color "#e52b50"))
+
+(defun hydra-vi/post ()
+  (set-cursor-color "#ffffff"))
+                      
+(defhydra hydra-zoom (global-map "<f2>")  
+  "zoom"
+  ("g" text-scale-increase "in")
+  ("l" text-scale-decrease "out"))
+
+
+(defhydra hydra-window (global-map "<f3>")
+  "window"
+  ("h" windmove-left) 
+  ("j" windmove-down) 
+  ("k" windmove-up) 
+  ("l" windmove-right) 
+  ("v" (lambda ()
+         (interactive)
+         (split-window-right)
+         (windmove-right)
+         "vert"
+         ))
+  ("-" (lambda ()
+         (interactive)
+         (split-window-below)
+         (windmove-down)
+         "horz"
+         ))
+  ("x" +workspace/close-window-or-workspace)
+  ("X" +workspace/close-window-or-workspace :color blue)
+  ("1" delete-other-windows :color blue)
+  ("f" +ivy/projectile-find-file :color blue)
+  ("F" counsel-fzf :color blue)   
+  ("b" counsel-projectile-switch-to-buffer :color blue)
+  ("B" ivy-switch-buffer :color blue)
+  ("t" projectile-toggle-between-implementation-and-test :color blue)
+  ("q" nil "quit")
+  )
