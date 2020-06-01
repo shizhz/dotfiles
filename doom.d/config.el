@@ -92,10 +92,16 @@
 (define-key evil-insert-state-map (kbd "C-k") 'kill-line) ;; Used to map to evil-insert-digraph
 
 (map! :leader "SPC" #'counsel-M-x)
+(map! :leader "p z" #'counsel-fzf)
 (map! "<print>" #'+treemacs/toggle)
 ;; (map! :leader "o p" #'tremacs-display-current-project-exclusively)
-(define-key company-active-map (kbd "TAB") 'company-complete-selection)
-(define-key company-active-map (kbd "<tab>") 'company-complete-selection)
+(map! (:when (featurep! :completion company)
+       (:after company
+        (:map company-active-map
+         "TAB"     #'company-complete-selection
+         [tab]     #'company-complete-selection))))
+                                        ;(define-key company-active-map (kbd "TAB") 'company-complete-selection)
+                                        ;(define-key company-active-map (kbd "<tab>") 'company-complete-selection)
 ;; (define-key company-active-map (kbd "<return>") 'newline-and-indent) 
 ;; (define-key company-active-map (kbd "RET") 'newline-and-indent) 
 
@@ -112,19 +118,13 @@
 ;; golangci-lint config, refer to https://github.com/weijiangan/flycheck-golangci-lint for more details
 (setq flycheck-golangci-lint-fast t)
 
-(defun hydra-vi/pre ()
-  (set-cursor-color "#e52b50"))
-
-(defun hydra-vi/post ()
-  (set-cursor-color "#ffffff"))
-                      
 (defhydra hydra-zoom (global-map "<f2>")  
   "zoom"
   ("g" text-scale-increase "in")
   ("l" text-scale-decrease "out"))
 
 
-(defhydra hydra-window (global-map "<f3>")
+(defhydra hydra-window ()
   "window"
   ("h" windmove-left) 
   ("j" windmove-down) 
@@ -152,3 +152,31 @@
   ("t" projectile-toggle-between-implementation-and-test :color blue)
   ("q" nil "quit")
   )
+
+(define-key evil-normal-state-map (kbd ",w") #'hydra-window/body)
+
+(defhydra hydra-jump ()
+  "jump"
+  ("l" #'avy-goto-line)
+  ("c" #'avy-goto-word-1)
+  ) 
+
+(setq evil-snipe-override-local-mode-map (make-sparse-keymap))
+(setq evil-snipe-local-mode-map (make-sparse-keymap))
+
+
+(defhydra hydra-snipe ()
+  "snipe"
+  ("s" evil-snipe-s)
+  ("S" evil-snipe-S)
+  ("f" evil-snipe-f)
+  ("F" evil-snipe-F)
+  ("j" evil-snipe-repeat)
+  ("k" evil-snipe-repeat-reverse)
+  ("q" nil :color blue)
+  )
+
+(setq evil-repeat-keys nil)                                                 
+(define-key evil-normal-state-map [remap evil-snipe-s]  #'hydra-snipe/body) ;; Remap evil-snip-s to hydra-snipe/body
+
+(whitespace-mode -1)
