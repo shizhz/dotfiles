@@ -92,7 +92,7 @@
       "C-S-L" #'evil-window-right
       )
 (define-key evil-insert-state-map (kbd "C-j") 'company-yasnippet) ;; Used to map to +default/newline
-(define-key evil-insert-state-map (kbd "C-x C-s") 'save-buffer);; Used to map to company-yasnippet
+;; (define-key evil-insert-state-map (kbd "C-x C-s") 'save-buffer);; Used to map to company-yasnippet
 (define-key evil-insert-state-map (kbd "C-k") 'kill-line) ;; Used to map to evil-insert-digraph
 
 (map! :leader "SPC" #'counsel-M-x)
