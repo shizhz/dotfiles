@@ -86,6 +86,10 @@
 (map! "C-s" #'counsel-grep-or-swiper
       "C-M-[" #'+evil/previous-beginning-of-method 
       "C-M-]" #'+evil/next-beginning-of-method 
+      "C-S-H" #'evil-window-left
+      "C-S-J" #'evil-window-down
+      "C-S-K" #'evil-window-up
+      "C-S-L" #'evil-window-right
       )
 (define-key evil-insert-state-map (kbd "C-j") 'company-yasnippet) ;; Used to map to +default/newline
 (define-key evil-insert-state-map (kbd "C-x C-s") 'save-buffer);; Used to map to company-yasnippet
@@ -130,13 +134,19 @@
   ("j" windmove-down) 
   ("k" windmove-up) 
   ("l" windmove-right) 
+  ("H" +evil/window-move-left)
+  ("L" +evil/window-move-right)
+  ("J" +evil/window-move-down)
+  ("K" +evil/window-move-up)
+  ("n" evil-window-new)
+  ("w" ace-window)
   ("v" (lambda ()
          (interactive)
          (split-window-right)
          (windmove-right)
          "vert"
          ))
-  ("-" (lambda ()
+  ("s" (lambda ()
          (interactive)
          (split-window-below)
          (windmove-down)
@@ -144,12 +154,18 @@
          ))
   ("x" +workspace/close-window-or-workspace)
   ("X" +workspace/close-window-or-workspace :color blue)
+  ("c" ace-delete-window)
   ("1" delete-other-windows :color blue)
   ("f" +ivy/projectile-find-file :color blue)
   ("F" counsel-fzf :color blue)   
   ("b" counsel-projectile-switch-to-buffer :color blue)
   ("B" ivy-switch-buffer :color blue)
   ("t" projectile-toggle-between-implementation-and-test :color blue)
+  ("<" evil-window-decrease-width)
+  (">" evil-window-increase-width)
+  ("+" evil-window-increase-height)
+  ("-" evil-window-decrease-height)
+  ("=" balance-windows)
   ("q" nil "quit")
   )
 
@@ -157,26 +173,43 @@
 
 (defhydra hydra-jump ()
   "jump"
-  ("l" #'avy-goto-line)
-  ("c" #'avy-goto-word-1)
-  ) 
-
-(setq evil-snipe-override-local-mode-map (make-sparse-keymap))
-(setq evil-snipe-local-mode-map (make-sparse-keymap))
-
-
-(defhydra hydra-snipe ()
-  "snipe"
+  ("o" #'avy-goto-word-1 :color blue)
+  ("p" #'avy-goto-word-0 :color blue)
+  ("i" #'avy-goto-symbol-1 :color blue)
+  ("l" #'(lambda ()
+           (interactive)
+           (avy-goto-line)
+           (recenter)))
   ("s" evil-snipe-s)
   ("S" evil-snipe-S)
   ("f" evil-snipe-f)
   ("F" evil-snipe-F)
   ("j" evil-snipe-repeat)
   ("k" evil-snipe-repeat-reverse)
-  ("q" nil :color blue)
-  )
+  ("q" doom/escape :color blue)
+  ) 
 
 (setq evil-repeat-keys nil)                                                 
-(define-key evil-normal-state-map [remap evil-snipe-s]  #'hydra-snipe/body) ;; Remap evil-snip-s to hydra-snipe/body
+(define-key evil-normal-state-map [remap evil-snipe-s]  #'hydra-jump/body) ;; Remap evil-snip-s to hydra-snipe/body
+
+(defhydra hydra-comment ()
+  "comment"
+  ("l" comment-line)
+  ("d" comment-dwim)
+  ("b" comment-box :color blue)
+  ("r" comment-or-uncomment-region :colur blue)
+  ("q" doom/escape :color blue)
+  )
+
+(define-key evil-normal-state-map (kbd ",c") #'hydra-comment/body)
+(define-key evil-visual-state-map (kbd ",c") #'hydra-comment/body)
+
+(defhydra hydra-select ()
+  "select"
+  ("s" er/expand-region)
+  ("q" doom/escape :color blue)
+  )
+
+(define-key evil-normal-state-map (kbd ",s") #'hydra-select/body)
 
 (whitespace-mode -1)
