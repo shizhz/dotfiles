@@ -227,3 +227,4 @@
       "d l" #'szz/dired-jump-right)
 
 (whitespace-mode -1)
+(global-prettify-symbols-mode t)
