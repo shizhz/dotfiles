@@ -28,7 +28,7 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/org/")
+(setq org-directory "~/Work/Self/org")
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -143,15 +143,13 @@
   ("v" (lambda ()
          (interactive)
          (split-window-right)
-         (windmove-right)
-         "vert"
-         ))
+         (windmove-right))
+   "vert")
   ("s" (lambda ()
          (interactive)
          (split-window-below)
-         (windmove-down)
-         "horz"
-         ))
+         (windmove-down))
+   "horz")
   ("x" +workspace/close-window-or-workspace)
   ("X" +workspace/close-window-or-workspace :color blue)
   ("c" ace-delete-window)
@@ -211,5 +209,21 @@
   )
 
 (define-key evil-normal-state-map (kbd ",s") #'hydra-select/body)
+
+(defun szz/dired-jump-below ()
+  (interactive)
+  (split-window-below)
+  (windmove-down)
+  (dired-jump))
+
+(defun szz/dired-jump-right ()
+  (interactive)
+  (split-window-right)
+  (windmove-right)
+  (dired-jump))
+
+(map! :leader
+      "d j" #'szz/dired-jump-below
+      "d l" #'szz/dired-jump-right)
 
 (whitespace-mode -1)
