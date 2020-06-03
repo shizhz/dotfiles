@@ -66,6 +66,9 @@
 ;; (setq lsp-log-io 1)
 ;; (setq lsp-print-performance 1)
 (setq doom-themes-treemacs-theme "doom-colors")
+(setq-default org-display-custom-times t)
+(setq org-time-stamp-custom-formats '("<%F %a>" . "<%F %a %r>"))
+(setq org-log-done 'time)
 
 (setq read-process-output-max (* 3 1024 1024))
 (setq gc-cons-threshold 100000000)
