@@ -243,3 +243,11 @@
 (setq org-todo-keywords 
       '((sequence "TODO(t)" "DOING(i)" "BLOCKED(b)" "HOLD(h)" "|" "DONE(d)" "CANCELED(c)")
        (sequence "[ ](T)" "[-](S)" "[?](W)" "|" "[X](D)")))
+(setq org-todo-keyword-faces
+      '(("[-]" . +org-todo-active)
+       ("DOING" . +org-todo-active)
+       ("[?]" . +org-todo-onhold)
+       ("WAIT" . +org-todo-onhold)
+       ("HOLD" . +org-todo-onhold)
+       ("BLOCKED" . +org-todo-onhold)
+       ("PROJ" . +org-todo-project)))
