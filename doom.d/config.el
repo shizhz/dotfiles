@@ -251,3 +251,6 @@
        ("HOLD" . +org-todo-onhold)
        ("BLOCKED" . +org-todo-onhold)
        ("PROJ" . +org-todo-project)))
+
+;; go-mode key bindings
+(define-key go-mode-map (kbd "C-M-t") #'projectile-toggle-between-implementation-and-test)
