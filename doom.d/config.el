@@ -253,4 +253,19 @@
        ("PROJ" . +org-todo-project)))
 
 ;; go-mode key bindings
-(define-key go-mode-map (kbd "C-M-t") #'projectile-toggle-between-implementation-and-test)
+(define-key global-map (kbd "C-M-t") #'projectile-toggle-between-implementation-and-test)
+
+;; Javascript config
+;; (after! tide
+;;   (setq tide-completion-detailed t
+;;         tide-always-show-documentation t)
+;;   )
+
+;; (setq prettier-js-args '(
+;;                          "--trailing-comma" "none"
+;;                          "--parser" "flow"
+;;                          "--semi" "false"
+;;                          "single-quote" "true"
+;;                          ))
+;; (add-hook! (rjsx-mode js2-mode)
+;;            #'(prettier-js-mode flow-minor-enable-automatically))
