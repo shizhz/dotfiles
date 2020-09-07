@@ -46,3 +46,10 @@
 ;; our package manager can't deal with; see raxod502/straight.el#279)
 ;(package! builtin-package :recipe (:branch "develop"))
 (package! prettier)
+(use-package rime
+  :straight (rime :type git
+                  :host github
+                  :repo "DogLooksGood/emacs-rime"
+                  :files ("*.el" "Makefile" "lib.c"))
+  :custom
+  (default-input-method "rime"))
