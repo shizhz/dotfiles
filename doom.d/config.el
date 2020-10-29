@@ -255,6 +255,18 @@
 ;; go-mode key bindings
 (define-key global-map (kbd "C-M-t") #'projectile-toggle-between-implementation-and-test)
 
+(setq rime-user-data-dir "~/.config/fcitx/rime")
+(setq rime-disable-predicates
+      '(rime-predicate-evil-mode-p
+        rime-predicate-after-alphabet-char-p
+        rime-predicate-hydra-p
+        rime-predicate-current-uppercase-letter-p
+        rime-predicate-prog-in-code-p))
+
+(setq default-input-method "rime")
+(global-unset-key (kbd "C-\\"))
+(define-key global-map (kbd "M-s-SPC") #'toggle-input-method)
+
 ;; Javascript config
 ;; (after! tide
 ;;   (setq tide-completion-detailed t
