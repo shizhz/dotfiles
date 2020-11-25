@@ -54,7 +54,19 @@
 
 ;; (setq which-key-idle-delay 0.5)
 ;; (setq which-key-idle-secondary-delay 0)
-(setq frame-title-format '(buffer-file-name "%f" (dired-directory dired-directory "%b")))
+;; (setq frame-title-format '(buffer-file-name "%f" (dired-directory dired-directory "%b")))
+(setq frame-title-format
+      '(""
+        (:eval
+         (if (s-contains-p org-roam-directory (or buffer-file-name ""))
+             (replace-regexp-in-string
+              ".*/[0-9]*-?" "☰ "
+              (subst-char-in-string ?_ ?  buffer-file-name))
+           "%b"))
+        (:eval
+         (let ((project-name (projectile-project-name)))
+           (unless (string= "-" project-name)
+             (format (if (buffer-modified-p)  " ◉ %s" "  ●  %s") project-name))))))
 (setq url-proxy-services
    '(("no_proxy" . "^\\(localhost\\|10\\..*\\|192\\.168\\..*\\)")
      ("http" . "localhost:7890")
@@ -101,6 +113,12 @@
 (map! :leader "SPC" #'counsel-M-x)
 (map! :leader "p z" #'counsel-fzf)
 (map! "<print>" #'+treemacs/toggle)
+
+(after! company
+  (setq company-idle-delay 0.5
+        company-minimum-prefix-length 2)
+  (setq company-show-numbers t)
+  (add-hook 'evil-normal-state-entry-hook #'company-abort))
 ;; (map! :leader "o p" #'tremacs-display-current-project-exclusively)
 (map! (:when (featurep! :completion company)
        (:after company
@@ -254,14 +272,18 @@
 
 ;; go-mode key bindings
 (define-key global-map (kbd "C-M-t") #'projectile-toggle-between-implementation-and-test)
+(setq projectile-ignored-projects '("~/" "/tmp" "~/.emacs.d/.local/straight/repos/"))
+(defun projectile-ignored-project-function (filepath)
+  "Return t if FILEPATH is within any of `projectile-ignored-projects'"
+  (or (mapcar (lambda (p) (s-starts-with-p p filepath)) projectile-ignored-projects)))
 
 (setq rime-user-data-dir "~/.config/fcitx/rime")
-(setq rime-disable-predicates
-      '(rime-predicate-evil-mode-p
-        rime-predicate-after-alphabet-char-p
-        rime-predicate-hydra-p
-        rime-predicate-current-uppercase-letter-p
-        rime-predicate-prog-in-code-p))
+;; (setq rime-disable-predicates
+;;       '(rime-predicate-evil-mode-p
+;;         rime-predicate-after-alphabet-char-p
+;;         rime-predicate-hydra-p
+;;         rime-predicate-current-uppercase-letter-p
+;;         rime-predicate-prog-in-code-p))
 
 (setq default-input-method "rime")
 (global-unset-key (kbd "C-\\"))
@@ -281,3 +303,101 @@
 ;;                          ))
 ;; (add-hook! (rjsx-mode js2-mode)
 ;;            #'(prettier-js-mode flow-minor-enable-automatically))
+
+;; Splash screen
+
+(setq ivy-sort-max-size 50000)
+
+(sp-local-pair
+ '(org-mode)
+ "<<" ">>"
+ :actions '(insert))
+
+(use-package! lexic
+  :commands lexic-search lexic-list-dictionary
+  :config
+  (map! :map lexic-mode-map
+        :n "q" #'lexic-return-from-lexic
+        :nv "RET" #'lexic-search-word-at-point
+        :n "a" #'outline-show-all
+        :n "h" (cmd! (outline-hide-sublevels 3))
+        :n "o" #'lexic-toggle-entry
+        :n "n" #'lexic-next-entry
+        :n "N" (cmd! (lexic-next-entry t))
+        :n "p" #'lexic-previous-entry
+        :n "P" (cmd! (lexic-previous-entry t))
+        :n "E" (cmd! (lexic-return-from-lexic) ; expand
+                     (switch-to-buffer (lexic-get-buffer)))
+        :n "M" (cmd! (lexic-return-from-lexic) ; minimise
+                     (lexic-goto-lexic))
+        :n "C-p" #'lexic-search-history-backwards
+        :n "C-n" #'lexic-search-history-forwards
+        :n "/" (cmd! (call-interactively #'lexic-search))))
+
+(defadvice! +lookup/dictionary-definition-lexic (identifier &optional arg)
+  "Look up the definition of the word at point (or selection) using `lexic-search'."
+  :override #'+lookup/dictionary-definition
+  (interactive
+   (list (or (doom-thing-at-point-or-region 'word)
+             (read-string "Look up in dictionary: "))
+         current-prefix-arg))
+  (lexic-search identifier nil nil t))
+
+(after! tramp
+  (setenv "SHELL" "/bin/bash")
+  (setq tramp-shell-prompt-pattern "\\(?:^\\|
+\\)[^]#$%>\n]*#?[]#$%>] *\\(\\[[0-9;]*[a-zA-Z] *\\)*"))
+
+;; yas config
+(setq yas-triggers-in-field t)
+
+;; treemacs
+
+(after! treemacs
+  (defvar treemacs-file-ignore-extensions '()
+    "File extension which `treemacs-ignore-filter' will ensure are ignored")
+  (defvar treemacs-file-ignore-globs '()
+    "Globs which will are transformed to `treemacs-file-ignore-regexps' which `treemacs-ignore-filter' will ensure are ignored")
+  (defvar treemacs-file-ignore-regexps '()
+    "RegExps to be tested to ignore files, generated from `treeemacs-file-ignore-globs'")
+  (defun treemacs-file-ignore-generate-regexps ()
+    "Generate `treemacs-file-ignore-regexps' from `treemacs-file-ignore-globs'"
+    (setq treemacs-file-ignore-regexps (mapcar 'dired-glob-regexp treemacs-file-ignore-globs)))
+  (if (equal treemacs-file-ignore-globs '()) nil (treemacs-file-ignore-generate-regexps))
+  (defun treemacs-ignore-filter (file full-path)
+    "Ignore files specified by `treemacs-file-ignore-extensions', and `treemacs-file-ignore-regexps'"
+    (or (member (file-name-extension file) treemacs-file-ignore-extensions)
+        (let ((ignore-file nil))
+          (dolist (regexp treemacs-file-ignore-regexps ignore-file)
+            (setq ignore-file (or ignore-file (if (string-match-p regexp full-path) t nil)))))))
+  (add-to-list 'treemacs-ignored-file-predicates #'treemacs-ignore-filter))
+
+;; (setq treemacs-file-ignore-extensions
+;;       '(;; LaTeX
+;;         "aux"
+;;         "ptc"
+;;         "fdb_latexmk"
+;;         "fls"
+;;         "synctex.gz"
+;;         "toc"
+;;         ;; LaTeX - glossary
+;;         "glg"
+;;         "glo"
+;;         "gls"
+;;         "glsdefs"
+;;         "ist"
+;;         "acn"
+;;         "acr"
+;;         "alg"
+;;         ;; LaTeX - pgfplots
+;;         "mw"
+;;         ;; LaTeX - pdfx
+;;         "pdfa.xmpi"
+;;         ))
+;; (setq treemacs-file-ignore-globs
+;;       '(;; LaTeX
+;;         "*/_minted-*"
+;;         ;; AucTeX
+;;         "*/.auctex-auto"
+;;         "*/_region_.log"
+;;         "*/_region_.tex"))
