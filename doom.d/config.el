@@ -114,11 +114,7 @@
 (map! :leader "p z" #'counsel-fzf)
 (map! "<print>" #'+treemacs/toggle)
 
-(after! company
-  (setq company-idle-delay 0.5
-        company-minimum-prefix-length 2)
-  (setq company-show-numbers t)
-  (add-hook 'evil-normal-state-entry-hook #'company-abort))
+
 ;; (map! :leader "o p" #'tremacs-display-current-project-exclusively)
 (map! (:when (featurep! :completion company)
        (:after company
@@ -269,6 +265,8 @@
        ("HOLD" . +org-todo-onhold)
        ("BLOCKED" . +org-todo-onhold)
        ("PROJ" . +org-todo-project)))
+(setq org-hide-emphasis-markers t)
+(add-hook! 'org-mode-hook (lambda () (org-bullets-mode 1)))
 
 ;; go-mode key bindings
 (define-key global-map (kbd "C-M-t") #'projectile-toggle-between-implementation-and-test)
@@ -290,19 +288,18 @@
 (define-key global-map (kbd "M-s-SPC") #'toggle-input-method)
 
 ;; Javascript config
-;; (after! tide
-;;   (setq tide-completion-detailed t
-;;         tide-always-show-documentation t)
-;;   )
+(after! tide
+  (setq tide-completion-detailed t
+        tide-always-show-documentation t)
+  )
 
-;; (setq prettier-js-args '(
-;;                          "--trailing-comma" "none"
-;;                          "--parser" "flow"
-;;                          "--semi" "false"
-;;                          "single-quote" "true"
-;;                          ))
-;; (add-hook! (rjsx-mode js2-mode)
-;;            #'(prettier-js-mode flow-minor-enable-automatically))
+(setq prettier-js-args '(
+                         "--trailing-comma" "none"
+                         "--parser" "flow"
+                         "--semi" "false"
+                         ))
+(add-hook! (rjsx-mode js2-mode)
+           #'(prettier-js-mode flow-minor-enable-automatically))
 
 ;; Splash screen
 
@@ -312,41 +309,6 @@
  '(org-mode)
  "<<" ">>"
  :actions '(insert))
-
-(use-package! lexic
-  :commands lexic-search lexic-list-dictionary
-  :config
-  (map! :map lexic-mode-map
-        :n "q" #'lexic-return-from-lexic
-        :nv "RET" #'lexic-search-word-at-point
-        :n "a" #'outline-show-all
-        :n "h" (cmd! (outline-hide-sublevels 3))
-        :n "o" #'lexic-toggle-entry
-        :n "n" #'lexic-next-entry
-        :n "N" (cmd! (lexic-next-entry t))
-        :n "p" #'lexic-previous-entry
-        :n "P" (cmd! (lexic-previous-entry t))
-        :n "E" (cmd! (lexic-return-from-lexic) ; expand
-                     (switch-to-buffer (lexic-get-buffer)))
-        :n "M" (cmd! (lexic-return-from-lexic) ; minimise
-                     (lexic-goto-lexic))
-        :n "C-p" #'lexic-search-history-backwards
-        :n "C-n" #'lexic-search-history-forwards
-        :n "/" (cmd! (call-interactively #'lexic-search))))
-
-(defadvice! +lookup/dictionary-definition-lexic (identifier &optional arg)
-  "Look up the definition of the word at point (or selection) using `lexic-search'."
-  :override #'+lookup/dictionary-definition
-  (interactive
-   (list (or (doom-thing-at-point-or-region 'word)
-             (read-string "Look up in dictionary: "))
-         current-prefix-arg))
-  (lexic-search identifier nil nil t))
-
-(after! tramp
-  (setenv "SHELL" "/bin/bash")
-  (setq tramp-shell-prompt-pattern "\\(?:^\\|
-\\)[^]#$%>\n]*#?[]#$%>] *\\(\\[[0-9;]*[a-zA-Z] *\\)*"))
 
 ;; yas config
 (setq yas-triggers-in-field t)

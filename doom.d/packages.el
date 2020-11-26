@@ -45,7 +45,8 @@
 ;; This is required for some packages whose default branch isn't 'master' (which
 ;; our package manager can't deal with; see raxod502/straight.el#279)
 ;(package! builtin-package :recipe (:branch "develop"))
-;; (package! prettier)
+(package! prettier-js)
+(package! flow-minor-mode)
 (use-package rime
   :straight (rime :type git
                   :host github
@@ -56,11 +57,12 @@
 
 (package! org-super-agenda)
 (package! org-ref)
+(package! org-bullets)
 ;; (package! doc;; t
  ;;   :recipe (:host github :repo "progfolio/doct")
    ;; :pin "dabb30ebea..."
   ;; )
 
 ;; https://github.com/tecosaur/lexic
-(package! lexic :recipe (:host github :repo "tecosaur/lexic"))
+;; (package! lexic :recipe (:host github :repo "tecosaur/lexic"))
 
