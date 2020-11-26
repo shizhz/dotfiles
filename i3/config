@@ -207,8 +207,8 @@ mode "$mode_system" {
 bindsym $mod+Scroll_Lock mode "$mode_system"
 
 mode "run" {
-	bindsym c exec --no-startup-id google-chrome-stable; mode "default"
-	bindsym Shift+c exec --no-startup-id google-chrome-stable -incognito; mode "default"
+	bindsym c exec --no-startup-id chromium; mode "default"
+	bindsym Shift+c exec --no-startup-id chromium -incognito; mode "default"
 	bindsym v exec --no-startup-id code; mode "default"
 	bindsym g exec --no-startup-id gvim; mode "default"
 	bindsym Shift+g exec --no-startup-id terminator -T "vim" -e vim; mode "default"
@@ -333,7 +333,7 @@ bar {
 }
 
 # exec --no-startup-id feh --bg-scale /usr/share/pixmaps/background-img-face.jpg
-exec --no-startup-id google-chrome-stable
+exec --no-startup-id chromium
 # exec --no-startup-id terminator
 exec --no-startup-id fcitx
 exec --no-startup-id electronic-wechat

@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: com
+# --
+class $1 extends React.Component {
+  render() {
+    return (
+      $2
+    )
+  }
+}
