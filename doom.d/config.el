@@ -297,11 +297,11 @@
                          "--trailing-comma" "none"
                          "--parser" "flow"
                          "--semi" "false"
+                         "--tab-width" "2"
+                         "--use-tabs" "false"
                          ))
 (add-hook! (rjsx-mode js2-mode)
            #'(prettier-js-mode flow-minor-enable-automatically))
-
-;; Splash screen
 
 (setq ivy-sort-max-size 50000)
 
