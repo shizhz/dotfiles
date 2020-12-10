@@ -380,15 +380,30 @@
 (add-hook! 'text-mode-hook 'auto-fill-mode)
 
 ;; DON'T use (`font-family-list'), it's unreliable on Linux
-(when (find-font (font-spec :name "Sarasa Mono SC Nerd"))
-  (setq doom-font (font-spec :family "Sarasa Mono SC Nerd" :size 16)
-        doom-variable-pitch-font (font-spec :family "Sarasa Mono SC Nerd")
-        doom-unicode-font (font-spec :family "Sarasa Mono SC Nerd")
-        doom-big-font (font-spec :family "Sarasa Mono SC Nerd" :size 20)))
+;; (when (find-font (font-spec :name "Sarasa Mono SC Nerd"))
+;; (setq doom-font (font-spec :family "Sarasa Mono SC Nerd" :size 16)
+;;       doom-variable-pitch-font (font-spec :family "Sarasa Mono SC Nerd")
+;;       doom-unicode-font (font-spec :family "Sarasa Mono SC Nerd")
+;;       doom-big-font (font-spec :family "Sarasa Mono SC Nerd" :size 20))
+;;   )
+
+(defun +szz/better-font()
+        (setq doom-font (font-spec :family "Sarasa Mono SC Nerd" :size 16)
+              doom-variable-pitch-font (font-spec :family "Sarasa Mono SC Nerd")
+              doom-unicode-font (font-spec :family "Sarasa Mono SC Nerd")
+              doom-big-font (font-spec :family "Sarasa Mono SC Nerd" :size 20)))
+
+(defun +szz|init-font(frame)
+  (with-selected-frame frame
+    (if (display-graphic-p)
+        (+szz/better-font))))
+
+(if (and (fboundp 'daemonp) (daemonp))
+(add-hook 'after-make-frame-functions #'+szz|init-font))
+(+szz/better-font)
 
 (set-display-table-slot standard-display-table
                         'vertical-border
                         (make-glyph-code ?│))
-
 ;; highlight-indent-guides
 (setq highlight-indent-guides-suppress-auto-error t)
