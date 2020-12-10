@@ -93,9 +93,10 @@
 (push '(?\[ "[[({]") evil-snipe-aliases)
 (setq evil-snipe-scope 'buffer)
 
-(add-hook! 'before-save-hook
-           #'lsp-format-buffer
-           #'lsp-organize-imports)
+(after! go-mode
+  (add-hook! 'before-save-hook
+             #'lsp-format-buffer
+             #'lsp-organize-imports))
 
 ;; key bindings
 (map! "C-s" #'counsel-grep-or-swiper
@@ -299,7 +300,8 @@
                          "--semi" "false"
                          ))
 (add-hook! (rjsx-mode js2-mode)
-           #'(prettier-js-mode flow-minor-enable-automatically))
+           #'(prettier-js-mode ;; flow-minor-enable-automatically
+                               ))
 
 ;; Splash screen
 
@@ -363,3 +365,30 @@
 ;;         "*/.auctex-auto"
 ;;         "*/_region_.log"
 ;;         "*/_region_.tex"))
+
+
+;; 使用等距更纱黑体解决org-mode中table对齐问题， 参考 https://emacs-china.org/t/org-mode/440/103
+;; 1. 安装字体：sudo pacman -S ttf-sarasa-gothic
+;; 2. 安装nerd字体补丁：https://github.com/laishulu/Sarasa-Mono-SC-Nerd
+;;    下载ttf文件copy到~/.local/share/fonts/目录，然后执行fc-cache -vf
+;; 3. 使用如下配置，参考 https://github.com/laishulu/conf/blob/master/emacs/doom/ui.el
+;; Notes： 改变字体大小可能又对不齐了，据说是因为中英文不同的font-size导致的，还没有找到原因
+(global-visual-line-mode)
+(blink-cursor-mode)
+;; (global-term-cursor-mode)
+(setq-default fill-column 80)
+(add-hook! 'text-mode-hook 'auto-fill-mode)
+
+;; DON'T use (`font-family-list'), it's unreliable on Linux
+(when (find-font (font-spec :name "Sarasa Mono SC Nerd"))
+  (setq doom-font (font-spec :family "Sarasa Mono SC Nerd" :size 16)
+        doom-variable-pitch-font (font-spec :family "Sarasa Mono SC Nerd")
+        doom-unicode-font (font-spec :family "Sarasa Mono SC Nerd")
+        doom-big-font (font-spec :family "Sarasa Mono SC Nerd" :size 20)))
+
+(set-display-table-slot standard-display-table
+                        'vertical-border
+                        (make-glyph-code ?│))
+
+;; highlight-indent-guides
+(setq highlight-indent-guides-suppress-auto-error t)
