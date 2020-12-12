@@ -24,7 +24,8 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-one)
+;; (setq doom-theme 'doom-one)
+(setq doom-theme 'gruvbox)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -277,14 +278,23 @@
   (or (mapcar (lambda (p) (s-starts-with-p p filepath)) projectile-ignored-projects)))
 
 (setq rime-user-data-dir "~/.config/fcitx/rime")
-;; (setq rime-disable-predicates
-;;       '(rime-predicate-evil-mode-p
-;;         rime-predicate-after-alphabet-char-p
-;;         rime-predicate-hydra-p
-;;         rime-predicate-current-uppercase-letter-p
-;;         rime-predicate-prog-in-code-p))
+(setq rime-posframe-properties
+      (list :background-color "#333333"
+            :foreground-color "#dcdccc"
+            ;; :font "WenQuanYi Micro Hei Mono-14"
+            :internal-border-width 10))
+(setq rime-title "中")
+(setq rime-disable-predicates
+      '(rime-predicate-evil-mode-p
+        rime-predicate-ace-window-p
+        rime-predicate-hydra-p
+        rime-predicate-space-after-cc-p
+        rime-predicate-auto-english-p
+        rime-predicate-current-uppercase-letter-p
+        rime-predicate-prog-in-code-p))
 
-(setq default-input-method "rime")
+(setq default-input-method "rime"
+      rime-show-candidate 'posframe)
 (global-unset-key (kbd "C-\\"))
 (define-key global-map (kbd "M-s-SPC") #'toggle-input-method)
 
