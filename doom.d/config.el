@@ -25,7 +25,7 @@
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
 ;; (setq doom-theme 'doom-one)
-(setq doom-theme 'gruvbox)
+(setq doom-theme 'doom-gruvbox)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -284,6 +284,9 @@
             ;; :font "WenQuanYi Micro Hei Mono-14"
             :internal-border-width 10))
 (setq rime-title "中")
+(define-key global-map (kbd "M-s-SPC") #'toggle-input-method)
+(define-key evil-insert-state-map (kbd "M-s-j") #'rime-force-enable) ;
+(define-key evil-insert-state-map (kbd "M-s-k") #'rime-inline-ascii) ;
 (setq rime-disable-predicates
       '(rime-predicate-evil-mode-p
         rime-predicate-ace-window-p
@@ -296,7 +299,6 @@
 (setq default-input-method "rime"
       rime-show-candidate 'posframe)
 (global-unset-key (kbd "C-\\"))
-(define-key global-map (kbd "M-s-SPC") #'toggle-input-method)
 
 ;; Javascript config
 (after! tide
@@ -387,7 +389,7 @@
 (blink-cursor-mode)
 ;; (global-term-cursor-mode)
 (setq-default fill-column 80)
-(add-hook! 'text-mode-hook 'auto-fill-mode)
+;; (add-hook! 'text-mode-hook 'auto-fill-mode)
 
 ;; DON'T use (`font-family-list'), it's unreliable on Linux
 ;; (when (find-font (font-spec :name "Sarasa Mono SC Nerd"))
