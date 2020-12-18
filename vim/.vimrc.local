@@ -2,7 +2,7 @@ set relativenumber
 set nospell
 set encoding=utf-8
 colorscheme codedark
-let g:airline_theme = 'codedark'
+let g:airline_theme = 'zenburn'
 nmap ; :
 imap <C-a> <ESC>^i
 imap <C-e> <ESC>$a
