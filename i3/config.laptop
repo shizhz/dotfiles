@@ -293,7 +293,6 @@ focus_on_window_activation focus
 exec --no-startup-id chromium
 # exec --no-startup-id terminator
 exec --no-startup-id fcitx
-exec --no-startup-id electronic-wechat
 # exec --no-startup-id dingtalk
 # exec --no-startup-id code
 # exec --no-startup-id conky -c $HOME/.config/conky/conky_sysinfo.lua
@@ -305,9 +304,6 @@ exec --no-startup-id emacs --daemon
 # assign [class='netease-cloud-music'] 3R:Music
 # for_window [class='netease-cloud-music'] focus
 
-assign [class="electronic-wechat"] 9R
-for_window [class="electronic-wechat"] focus
-
 assign [class="Gvim"] 2L:Gvim
 for_window [class="Gvim"] focus
 
@@ -317,7 +313,6 @@ for_window [class="Gvim"] focus
 assign [class="Code"] 4L:VSCode
 for_window [class="Code"] focus
 
-assign [class="electronic-wechat"] 9R
 assign [class="dingtalk"] 9R
 for_window [title=Gitter] 9R
 for_window [instance="guake"] floating disable
