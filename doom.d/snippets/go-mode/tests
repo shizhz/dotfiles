@@ -3,13 +3,14 @@
 # key: tests
 # --
 tests := []struct {
-	expected
+	  expected $1,
+	  $2
 }{
-	{},
+	{$0},
 }
 
 for n, tt := range tests {
-	actual := 
+	actual := $3 
 	if tt.expected != actual {
 		t.Errorf("#%d want %v, got %v", n, tt.expected, actual)
 	}

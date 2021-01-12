@@ -131,6 +131,7 @@
 (setq lsp-prefer-capf t)
 (setq lsp-ui-sideline-show-hover nil)
 (setq ivy-read-action-function #'ivy-hydra-read-action)
+(setq lsp-file-watch-threshold 20000)
 
 ;; Auto-format after paste: https://discordapp.com/channels/406534637242810369/603399769015975996/714207056902619138
 (defadvice! reindent-after-paste (&rest _)
@@ -419,3 +420,15 @@
                         (make-glyph-code ?│))
 ;; highlight-indent-guides
 (setq highlight-indent-guides-suppress-auto-error t)
+
+;; 配置 org -> pdf 转换，默认 pdflatex 不支持中文，使用 xelatex. 使用前先：sudo pacman -S texlive-latexextra
+;; 其他讨论见：https://emacs-china.org/t/latex/4820/19
+;; (setq org-latex-pdf-process
+;;       '(
+;;         "xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+;;         "xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+;;         "xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+;;         "rm -fr %b.out %b.log %b.tex auto"
+;;         ))
+;; ;; 设置默认后端为 `xelatex'
+;; (setq org-latex-compiler "xelatex")
