@@ -1,5 +1,8 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
+(setq package-archives '(("gnu" . "http://elpa.emacs-china.org/gnu/")
+                         ("melpa" . "http://elpa.emacs-china.org/melpa/")))
+
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
 
@@ -19,7 +22,7 @@
 ;;
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
-(setq doom-font (font-spec :family "monospace" :size 14))
+;; (setq doom-font (font-spec :family "monospace" :size 14))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
@@ -380,12 +383,6 @@
 ;;         "*/_region_.tex"))
 
 
-;; 使用等距更纱黑体解决org-mode中table对齐问题， 参考 https://emacs-china.org/t/org-mode/440/103
-;; 1. 安装字体：sudo pacman -S ttf-sarasa-gothic
-;; 2. 安装nerd字体补丁：https://github.com/laishulu/Sarasa-Mono-SC-Nerd
-;;    下载ttf文件copy到~/.local/share/fonts/目录，然后执行fc-cache -vf
-;; 3. 使用如下配置，参考 https://github.com/laishulu/conf/blob/master/emacs/doom/ui.el
-;; Notes： 改变字体大小可能又对不齐了，据说是因为中英文不同的font-size导致的，还没有找到原因
 (global-visual-line-mode)
 (blink-cursor-mode)
 ;; (global-term-cursor-mode)
@@ -400,20 +397,35 @@
 ;;       doom-big-font (font-spec :family "Sarasa Mono SC Nerd" :size 20))
 ;;   )
 
-(defun +szz/better-font()
-        (setq doom-font (font-spec :family "Sarasa Mono SC Nerd" :size 16)
-              doom-variable-pitch-font (font-spec :family "Sarasa Mono SC Nerd")
-              doom-unicode-font (font-spec :family "Sarasa Mono SC Nerd")
-              doom-big-font (font-spec :family "Sarasa Mono SC Nerd" :size 20)))
+;; 使用等距更纱黑体解决org-mode中table对齐问题， 参考 https://emacs-china.org/t/org-mode/440/103
+;; 1. 安装字体：sudo pacman -S ttf-sarasa-gothic
+;; 2. 安装nerd字体补丁：https://github.com/laishulu/Sarasa-Mono-SC-Nerd
+;;    下载ttf文件copy到~/.local/share/fonts/目录，然后执行fc-cache -vf
+;; 3. 使用如下配置，参考 https://github.com/laishulu/conf/blob/master/emacs/doom/ui.el
+;; Notes： 改变字体大小可能又对不齐了，据说是因为中英文不同的font-size导致的，还没有找到原因
 
-(defun +szz|init-font(frame)
-  (with-selected-frame frame
-    (if (display-graphic-p)
-        (+szz/better-font))))
+(defun +szz/set-font()
+  (setq doom-font (font-spec :family "Sarasa Mono SC Nerd" :size 16)
+        doom-variable-pitch-font (font-spec :family "Sarasa Mono SC Nerd")
+        doom-unicode-font (font-spec :family "Sarasa Mono SC Nerd")
+        doom-big-font (font-spec :family "Sarasa Mono SC Nerd" :size 20))
+  )
+
+;; (defun +szz|init-font(frame)
+;;   (with-selected-frame frame
+;;     (if (display-graphic-p)
+;;         (+szz/set-font))))
 
 (if (and (fboundp 'daemonp) (daemonp))
-(add-hook 'after-make-frame-functions #'+szz|init-font))
-(+szz/better-font)
+    (add-hook 'after-make-frame-functions
+              (lambda (frame)
+                (with-selected-frame frame
+                  (if (display-graphic-p)
+                      (+szz/set-font))
+                  ))))
+(+szz/set-font)
+;; 去掉 file-icons, 否则 "言" 字显示不正确，参考：https://emacs-china.org/t/emacs/13669/15
+(setq doom-unicode-extra-fonts (remove "file-icons" doom-unicode-extra-fonts))
 
 (set-display-table-slot standard-display-table
                         'vertical-border

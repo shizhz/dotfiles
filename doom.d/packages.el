@@ -58,6 +58,7 @@
 (package! org-super-agenda)
 (package! org-ref)
 (package! org-bullets)
+(package! protobuf-mode)
 ;; (package! doc;; t
  ;;   :recipe (:host github :repo "progfolio/doct")
    ;; :pin "dabb30ebea..."
