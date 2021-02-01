@@ -444,3 +444,6 @@
 ;;         ))
 ;; ;; 设置默认后端为 `xelatex'
 ;; (setq org-latex-compiler "xelatex")
+
+;; Java Config
+(add-hook! 'java-mode-hook #'lsp)

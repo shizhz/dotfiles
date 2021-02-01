@@ -67,3 +67,4 @@
 ;; https://github.com/tecosaur/lexic
 ;; (package! lexic :recipe (:host github :repo "tecosaur/lexic"))
 
+(package! lsp-java)
