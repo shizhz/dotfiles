@@ -98,9 +98,13 @@
 (setq evil-snipe-scope 'buffer)
 
 (after! go-mode
+  (require 'dap-go)
   (add-hook! 'before-save-hook
              #'lsp-format-buffer
-             #'lsp-organize-imports))
+             #'lsp-organize-imports)
+  (add-hook! 'dap-stopped-hook
+    (lambda (arg) (call-interactively #'dap-hydra)))
+  )
 
 ;; key bindings
 (map! "C-s" #'counsel-grep-or-swiper
@@ -301,7 +305,8 @@
         rime-predicate-prog-in-code-p))
 
 (setq default-input-method "rime"
-      rime-show-candidate 'posframe)
+      ;; rime-show-candidate 'posframe) ；当汉字比较多时，输入会卡顿。 
+      rime-show-candidate 'minibuffer)
 (global-unset-key (kbd "C-\\"))
 
 ;; Javascript config
@@ -446,4 +451,7 @@
 ;; (setq org-latex-compiler "xelatex")
 
 ;; Java Config
-(add-hook! 'java-mode-hook #'lsp)
+;; (add-hook! 'java-mode-hook #'lsp)
+;; (require 'dap-java)
+(add-hook! 'c-mode-hook 'lsp)
+(add-hook! 'c++-mode-hook 'lsp)

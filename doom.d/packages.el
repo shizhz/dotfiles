@@ -68,3 +68,7 @@
 ;; (package! lexic :recipe (:host github :repo "tecosaur/lexic"))
 
 (package! lsp-java)
+
+(package! dap-mode)
+;; (package! dap-java)
+;; (package! dap-go)
