@@ -430,7 +430,8 @@
                   ))))
 (+szz/set-font)
 ;; 去掉 file-icons, 否则 "言" 字显示不正确，参考：https://emacs-china.org/t/emacs/13669/15
-(setq doom-unicode-extra-fonts (remove "file-icons" doom-unicode-extra-fonts))
+;; 2022-02-10: doom upgrade 后该变量已经被废弃了，不设置也没有关系
+;; (setq doom-unicode-extra-fonts (remove "file-icons" doom-unicode-extra-fonts))
 
 (set-display-table-slot standard-display-table
                         'vertical-border
@@ -455,3 +456,6 @@
 ;; (require 'dap-java)
 (add-hook! 'c-mode-hook 'lsp)
 (add-hook! 'c++-mode-hook 'lsp)
+
+;; Rust Config
+(setq rustic-lsp-server 'rust-analyzer)

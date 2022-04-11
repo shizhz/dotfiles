@@ -47,13 +47,25 @@
 ;(package! builtin-package :recipe (:branch "develop"))
 (package! prettier-js)
 ;; (package! flow-minor-mode)
-(use-package rime
-  :straight (rime :type git
-                  :host github
-                  :repo "DogLooksGood/emacs-rime"
-                  :files ("*.el" "Makefile" "lib.c"))
-  :custom
-  (default-input-method "rime"))
+;(use-package rime
+;              :custom
+;              (default-input-method "rime"))
+(package! magit-section)
+;; 2022-02-10: doom upgrade 之后magit 无法正常工作，提示函数 magit--version>= 非法，参见：https://github.com/hlissner/doom-emacs/issues/5935
+(package! code-review :disable t)
+
+(package! rime :recipe
+          (:host github
+          :repo "DogLooksGood/emacs-rime"
+          :files ("*.el" "Makefile" "lib.c")))
+(setq default-input-method "rime")
+;(use-package rime
+;  :straight (rime :type git
+;                  :host github
+;                  :repo "DogLooksGood/emacs-rime"
+;                  :files ("*.el" "Makefile" "lib.c"))
+;  :custom
+;  (default-input-method "rime"))
 
 (package! org-super-agenda)
 (package! org-ref)

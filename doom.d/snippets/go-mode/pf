@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: pf
+# uuid: pf
+# key: trigger-key
+# condition: t
+# --
+"$1", ${1:fieldName},
