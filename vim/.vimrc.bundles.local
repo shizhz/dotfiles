@@ -1,9 +1,0 @@
-Bundle 'Yggdroot/indentLine'
-Bundle 'tomasiser/vim-code-dark'
-Bundle 'vim-airline/vim-airline-theme'
-"Bundle 'posva/vim-vue'
-Plugin 'neoclide/coc.nvim', {'branch': 'release'}
-Bundle 'SirVer/ultisnips'
-Bundle 'honza/vim-snippets'
-Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plugin 'junegunn/fzf.vim'
