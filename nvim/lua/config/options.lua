@@ -6,3 +6,4 @@ if vim.g.neovide then
   vim.g.neovide_cursor_animate_command_line = false
   vim.g.neovide_cursor_trail_size = 0 -- I don't like the animation trail
 end
+vim.cmd("language en_US")

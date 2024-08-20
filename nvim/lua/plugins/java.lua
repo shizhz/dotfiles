@@ -354,6 +354,7 @@ return {
                   ["<leader>tt"] = { require("jdtls.dap").test_class, "Run All Test" },
                   ["<leader>tr"] = { require("jdtls.dap").test_nearest_method, "Run Nearest Test" },
                   ["<leader>tT"] = { require("jdtls.dap").pick_test, "Run Test" },
+                  ["<leader>ti"] = { require("jdtls.dap").toggle_repl, "Toggle Repl" },
                 }, { mode = "n", buffer = args.buf })
               end
             end

@@ -8,34 +8,19 @@ return {
       local options = {
         signs = {
           add = {
-            hl = "GitSignsAdd",
             text = icons.ui.BoldLineLeft,
-            numhl = "GitSignsAddNr",
-            linehl = "GitSignsAddLn",
           },
           change = {
-            hl = "GitSignsChange",
             text = icons.ui.BoldLineLeft,
-            numhl = "GitSignsChangeNr",
-            linehl = "GitSignsChangeLn",
           },
           delete = {
-            hl = "GitSignsDelete",
             text = icons.ui.Triangle,
-            numhl = "GitSignsDeleteNr",
-            linehl = "GitSignsDeleteLn",
           },
           topdelete = {
-            hl = "GitSignsDelete",
             text = icons.ui.Triangle,
-            numhl = "GitSignsDeleteNr",
-            linehl = "GitSignsDeleteLn",
           },
           changedelete = {
-            hl = "GitSignsChange",
             text = icons.ui.BoldLineLeft,
-            numhl = "GitSignsChangeNr",
-            linehl = "GitSignsChangeLn",
           },
         },
         signcolumn = true,
@@ -67,7 +52,6 @@ return {
           row = 0,
           col = 1,
         },
-        yadm = { enable = false },
 
         on_attach = function(bufnr)
           local gs = package.loaded.gitsigns
@@ -111,7 +95,7 @@ return {
           map("n", "<leader>hD", function()
             gs.diffthis("~")
           end, opts("Diff Head"))
-          map("n", "<leader>td", gs.toggle_deleted, opts("Toggle Deleted"))
+          map("n", "<leader>hi", gs.toggle_deleted, opts("Toggle Deleted"))
 
           map("v", "<leader>hs", function()
             gs.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })

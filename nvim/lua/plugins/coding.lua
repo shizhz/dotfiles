@@ -1,5 +1,6 @@
 return {
   -- Use new config for <tab>
+  { "axieax/urlview.nvim" },
 
   {
     "L3MON4D3/LuaSnip",

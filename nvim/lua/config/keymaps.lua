@@ -35,6 +35,7 @@ map("n", "*", "*zz")
 map("n", "#", "#zz")
 map("n", "g*", "g*zz")
 map("n", "g#", "g#zz")
+map("n", "gX", "<cmd>UrlView<CR>", { desc = "Open urls in current buffer selectively" })
 map("n", "<leader>gb", "<cmd>G blame<CR>", { desc = "Git blame" })
 -- map("n", "<C-a>", "gg<S-v>G", { desc = "Select All" })
 
