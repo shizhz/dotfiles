@@ -8,3 +8,16 @@ This repo contains all of the current dotfiles used to configure my Archlinux, w
 - [Rofi](https://github.com/shizhz/dotfiles/tree/master/rofi), application launcher and window switcher
 
 Please check each subdirectory for more detailed installation info.
+
+Tool Stack
+==========
+- [ghostty](https://ghostty.org/)
+- [bat](https://github.com/sharkdp/bat)
+- [posting](https://github.com/darrenburns/posting)
+- [superfile](https://github.com/yorukot/superfile)
+- [harlequin](https://harlequin.sh/)
+- [Hyprland](https://github.com/hyprwm/Hyprland)
+- zsh
+
+Resources:
+- https://medium.com/@a-lebailly/my-2025-stack-a-modern-and-optimized-setup-06533ba67bc9

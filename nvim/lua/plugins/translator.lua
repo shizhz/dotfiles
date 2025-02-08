@@ -8,7 +8,7 @@ return {
     end,
     keys = {
       {
-        "<leader>t",
+        "<leader>T",
         "<cmd>TranslateW<CR>",
         mode = { "n", "v" },
         desc = "Tanslate and display in a window",
