@@ -1,5 +1,20 @@
 return {
   {
+    "neovim/nvim-lspconfig",
+    opts = {
+      servers = {
+        gopls = {
+          settings = {
+            gopls = {
+              buildFlags = { "-tags=wireinject integration" },
+              usePlaceholders = false,
+            },
+          },
+        },
+      },
+    },
+  },
+  {
     "ray-x/go.nvim",
     dependencies = { -- optional packages
       "ray-x/guihua.lua",

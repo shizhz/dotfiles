@@ -186,7 +186,9 @@ return {
         local config = {
           cmd = {
             -- vim.fn.expand("~/.sdkman/candidates/java/21.0.2-tem/bin/java"), -- or '/path/to/java17_or_newer/bin/java'
-            "/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/bin/java",
+            -- 2025.2.26：升级最新版jdtls后需要升级jdk版本至21
+            -- "/Library/Java/JavaVirtualMachines/jdk-22.jdk/Contents/Home/bin/java",
+            "/Users/shizhz/Tools/jdk-21.0.5.jdk/Contents/Home/bin/java",
 
             "-Declipse.application=org.eclipse.jdt.ls.core.id1",
             "-Dosgi.bundles.defaultStartLevel=4",
@@ -218,7 +220,8 @@ return {
           }),
 
           -- on_attach = require("gmr.configs.lsp").on_attach,
-          capabilities = require("cmp_nvim_lsp").default_capabilities(),
+          -- capabilities = require("cmp_nvim_lsp").default_capabilities(),
+          capabilities = LazyVim.has("cmp-nvim-lsp") and require("cmp_nvim_lsp").default_capabilities() or nil,
 
           -- Here you can configure eclipse.jdt.ls specific settings
           -- See https://github.com/eclipse/eclipse.jdt.ls/wiki/Running-the-JAVA-LS-server-from-the-command-line#initialize-request
@@ -240,18 +243,18 @@ return {
               },
               configuration = {
                 runtimes = {
-                  {
-                    name = "JavaSE-1.8",
-                    path = "/Library/Java/JavaVirtualMachines/jdk1.8.0_202.jdk/Contents/Home",
-                  },
-                  {
-                    name = "JavaSE-17",
-                    path = "/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/",
-                  },
                   -- {
-                  --   name = "JavaSE-22",
-                  --   path = "/Library/Java/JavaVirtualMachines/jdk-22.jdk/Contents/Home/",
+                  --   name = "JavaSE-1.8",
+                  --   path = "/Library/Java/JavaVirtualMachines/jdk1.8.0_202.jdk/Contents/Home",
                   -- },
+                  -- {
+                  --   name = "JavaSE-17",
+                  --   path = "/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/",
+                  -- },
+                  {
+                    name = "JavaSE-21",
+                    path = "/Users/shizhz/Tools/jdk-21.0.5.jdk/Contents/Home/",
+                  },
                 },
               },
               references = {

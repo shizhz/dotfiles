@@ -25,15 +25,16 @@ return {
   },
   {
     "rcarriga/nvim-dap-ui",
-    dependencies = {
-      {
-        "folke/neodev.nvim",
-        opts = {
-          -- NOTE: ([nvim-dap-ui](https://github.com/rcarriga/nvim-dap-ui)) 建议如下配置，但使用如下配置会导致打开lua配置时报错：undefined global variable 'vim'
-          -- 暂时disable掉该配置
-          library = { plugins = { "nvim-dap-ui" }, types = true },
-        },
-      },
-    },
+    -- 2025.2.25: 升级LazyVim后提示neodev已被lazydev替代，因此将以下内容注释掉
+    -- dependencies = {
+    --   {
+    --     "folke/neodev.nvim",
+    --     opts = {
+    --       -- NOTE: ([nvim-dap-ui](https://github.com/rcarriga/nvim-dap-ui)) 建议如下配置，但使用如下配置会导致打开lua配置时报错：undefined global variable 'vim'
+    --       -- 暂时disable掉该配置
+    --       library = { plugins = { "nvim-dap-ui" }, types = true },
+    --     },
+    --   },
+    -- },
   },
 }
